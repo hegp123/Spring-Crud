@@ -18,8 +18,9 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model, @RequestParam(name = "error", defaultValue = "", required = false) String error) {
+    public String showLoginForm(Model model, @RequestParam(name = "error", required = false) String error) {
         model.addAttribute("userCredential", new UserCredential());
+        model.addAttribute("error", error);
         return "login";
     }
 
