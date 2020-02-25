@@ -1,5 +1,7 @@
 package com.g2.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,24 +14,38 @@ import com.g2.model.UserCredential;
 @Controller
 public class LoginController {
 
+    private static final Log LOGGER = LogFactory.getLog(LoginController.class);
+
     @GetMapping("/")
     public String redirectToLogin() {
+        LOGGER.info("METHOD: redirectToLogin()");
         return "redirect:/login";
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model, @RequestParam(name = "error", required = false) String error) {
+    public String showLoginForm(Model model, @RequestParam(name = "error", required = false) String error,
+            @RequestParam(name = "logout", required = false) String logout) {
+
+        LOGGER.info("METHOD: showLoginForm() -- params: error: " + error + ", logout: " + logout);
+
         model.addAttribute("userCredential", new UserCredential());
         model.addAttribute("error", error);
+        model.addAttribute("logout", logout);
+        LOGGER.info("Returning to login view");
         return "login";
     }
 
     @PostMapping("/loginCheck")
     public String loginCheck(@ModelAttribute(name = "userCredential") UserCredential userCredential) {
+
+        LOGGER.info("METHOD: loginCheck() -- params: " + userCredential.toString());
+        
         if (userCredential.getUserName().equalsIgnoreCase("user")
                 && userCredential.getPassword().equalsIgnoreCase("user")) {
+            LOGGER.info("Returning to contacts view");
             return "contacts";
         }
+        LOGGER.info("Returning to login error");
         return "redirect:/login?error";
     }
 

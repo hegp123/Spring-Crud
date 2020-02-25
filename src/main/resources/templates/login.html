@@ -26,7 +26,9 @@
 			
 			<label for="inputPassword" class="sr-only">Password</label> 
 			<input type="password" id="inputPassword" class="form-control" placeholder="Password" th:field="*{password}"/>
+			
 			<div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid UserName or Password</div>
+			<div th:if="${logout != null}" class="alert alert-info" role="alert">Logout Successfully!</div>
 			
 			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>

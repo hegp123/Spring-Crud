@@ -30,4 +30,9 @@ public class UserCredential {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "UserCredential [userName=" + userName + ", password=" + password + "]";
+    }
+
 }
