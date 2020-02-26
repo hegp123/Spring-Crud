@@ -19,13 +19,17 @@
 
 	<div class="container">
 
-		<form class="form-signin" action="#" th:action="@{/loginCheck}" th:object="${userCredential}" method="post">
+		<form class="form-signin" th:action="@{/loginCheck}" method="POST">
+<!-- 		Esta linea del iput hidden es necesario para el funcionamiento de spring security -->
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			
 			<h2 class="form-signin-heading">Sign in</h2>
+			
 			<label for="inputEmail" class="sr-only">Username</label> 
-			<input type="text" id="inputUsername" class="form-control" placeholder="Username" th:field="*{userName}" /> 
+			<input type="text" class="form-control" placeholder="Username" name="userName" id="userName" /> 
 			
 			<label for="inputPassword" class="sr-only">Password</label> 
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" th:field="*{password}"/>
+			<input type="password" class="form-control" placeholder="Password"  name="password" id="password"/>
 			
 			<div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid UserName or Password</div>
 			<div th:if="${logout != null}" class="alert alert-info" role="alert">Logout Successfully!</div>
