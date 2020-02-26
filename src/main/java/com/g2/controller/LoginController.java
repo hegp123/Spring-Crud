@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.g2.constant.ViewContant;
 import com.g2.model.UserCredential;
 
 @Controller
@@ -19,7 +20,7 @@ public class LoginController {
     @GetMapping("/")
     public String redirectToLogin() {
         LOGGER.info("METHOD: redirectToLogin()");
-        return "redirect:/login";
+        return "redirect:/" + ViewContant.LOGIN;
     }
 
     @GetMapping("/login")
@@ -32,7 +33,7 @@ public class LoginController {
         model.addAttribute("error", error);
         model.addAttribute("logout", logout);
         LOGGER.info("Returning to login view");
-        return "login";
+        return ViewContant.LOGIN;
     }
 
     @PostMapping("/loginCheck")
@@ -43,10 +44,11 @@ public class LoginController {
         if (userCredential.getUserName().equalsIgnoreCase("user")
                 && userCredential.getPassword().equalsIgnoreCase("user")) {
             LOGGER.info("Returning to contacts view");
-            return "contacts";
+//            return ViewContant.CONTACTS;
+            return "redirect:/contact/showcontacts";
         }
         LOGGER.info("Returning to login error");
-        return "redirect:/login?error";
+        return "redirect:/" + ViewContant.LOGIN+"?error";
     }
 
 }
