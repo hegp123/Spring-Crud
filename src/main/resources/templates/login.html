@@ -19,7 +19,7 @@
 
 	<div class="container">
 
-		<form class="form-signin" th:action="@{/loginCheck}" method="POST">
+		<form class="form-signin" th:action="@{/logincheck}" method="POST">
 <!-- 		Esta linea del iput hidden es necesario para el funcionamiento de spring security -->
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			
